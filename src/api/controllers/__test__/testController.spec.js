@@ -3,7 +3,7 @@ const request = require('supertest');
 const app = require('../../index');
 
 describe('Pruebas de integración a los endpoints del controlador testController', () => {
-    describe('POST /test', () => {
+    describe('POST /tests', () => {
         describe('/makeSum', () => {
             describe('solicitudes exitosas', () => {
                 it('deberia de sumar exitosamente', async () => {
@@ -150,6 +150,31 @@ describe('Pruebas de integración a los endpoints del controlador testController
                     expect(res.body.result).toStrictEqual(bodyParams);
                 });
             });
+        });
+
+        describe('/makeProduct', () => {
+            describe('solicitud exitosa', () => {
+                it('debería de devolver el producto de 2 numeros, en este caso 12', async () => {
+                    const bodyParams = {
+                        numberOne: 4,
+                        numberTwo: 3
+                    }
+
+                    const res = await request(app)
+                        .post('/tdd/tests/makeProduct')
+                        .send(bodyParams)
+                        .set('Accept', 'application/json');
+
+                    expect(res.statusCode).toEqual(200);
+                    expect(res.body).toHaveProperty('message');
+                    expect.stringContaining(res.body.message);
+                    expect(res.body).toHaveProperty('result');
+                    expect(res.body.result).toStrictEqual(expect.any(Number));
+                    expect(res.body.result).toEqual(12);
+                });
+
+            });
+
         });
 
     });
