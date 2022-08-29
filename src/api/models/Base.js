@@ -14,7 +14,8 @@ knexConfig = {
     client: 'sqlite3',
     connection: {
         filename: './db.test.sqlite3'
-    }
+    },
+    useNullAsDefault: true
 };
 
 if (nodeEnv !== 'test') {
@@ -38,7 +39,7 @@ Model.knex(knex);
 
 class Base extends Model {
     static get modelPaths() {
-        return [path.resolve('src/models')];
+        return [path.resolve('src/api/models')];
     }
 }
 
