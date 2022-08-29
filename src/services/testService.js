@@ -1,6 +1,6 @@
 const _ = require('underscore');
 const Logger = require('../config/logger');
-const axios = require('axios');
+// const axios = require('axios');
 
 const log = Logger(__filename);
 
