@@ -1,8 +1,8 @@
 const TestService = require('../testService');
-const axios = require('axios');
-const MockAdapter = require('axios-mock-adapter');
+// const axios = require('axios');
+// const MockAdapter = require('axios-mock-adapter');
 
-let mockAdapter;
+// let mockAdapter;
 
 describe('Pruebas al servicio Test', () => {
     describe('pruebas a la funcion makeSum', () => {

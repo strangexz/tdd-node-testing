@@ -8,8 +8,8 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex(testModel.tableName).del()
   await knex(testModel.tableName).insert([
-    { id: 1, name: 'rowValue1', description: 'rowDescription1' },
-    { id: 2, name: 'rowValue2', description: 'rowDescription2' },
-    { id: 3, name: 'rowValue3', description: 'rowDescription3' }
+    { id: 1, name: 'rowValue1', description: 'rowDescription1', age: 10 },
+    { id: 2, name: 'rowValue2', description: 'rowDescription2', age: 21 },
+    { id: 3, name: 'rowValue3', description: 'rowDescription3', age: 1 }
   ]);
 };
