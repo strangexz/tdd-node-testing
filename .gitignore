@@ -105,7 +105,7 @@ dist
 .tern-port
 
 # DB Local files
-/database
+database
 
 # Misc
 .DS_Store
