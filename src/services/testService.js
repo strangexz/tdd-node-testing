@@ -138,7 +138,6 @@ class TestServices {
 
             /** Consultando el servicio de GeoJS */
             const response = await axios.get(urlApi + count);
-            console.log(response);
 
             log.debug('response', response);
             log.debug('response.data', response.data);
@@ -147,7 +146,7 @@ class TestServices {
 
             log.info('Fin del servicio TestServices.getDogs')
 
-            return { status: 0, result: response.data };
+            return { status: 0, message: 'consulta exitosa', result: response.data };
 
         } catch (error) {
             console.error(error);
@@ -167,7 +166,6 @@ class TestServices {
                 // Something happened in setting up the request that triggered an Error
                 console.error('Error', error.message);
             }
-            console.log(log);
             log.error(error.message);
             console.error('config', error.config);
 
