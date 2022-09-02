@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "local": "nodemon",
-    "test": "jest --detectOpenHandles",
+    "test": "jest --verbose --detectOpenHandles --forceExit",
     "db:migrate": "npx knex -- migrate:latest && npx knex migrate:latest --env test",
     "db:rollback": "npx knex -- migrate:rollback && npx knex migrate:rollback --env test",
     "db:reset": "npm run db:rollback && npm run db:setup",
