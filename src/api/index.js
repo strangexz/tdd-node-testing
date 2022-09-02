@@ -4,6 +4,7 @@ const httpStatusCode = require('http-status-codes');
 // const morgan = require('morgan');
 const uuidv1 = require('uuid').v1;
 const httpContext = require('express-http-context');
+const bodyParser = require('body-parser');
 
 const Logger = require('../config/logger');
 const routes = require('../api/routes/index');
@@ -14,8 +15,10 @@ const app = express();
 const router = express.Router();
 
 /* implementando body parser */
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 /* implementacion de http context */
 app.use(httpContext.middleware);
