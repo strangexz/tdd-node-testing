@@ -91,6 +91,10 @@ describe('Pruebas al servicio Test', () => {
             baseUrlApi = 'https://dog.ceo/api/breeds/image/random';
         });
 
+        afterEach(() => {
+            mockAdapter.reset();
+        });
+
         it('deberia de ser una consulta exitosa', async () => {
             const responseHeader = {
                 'date': new Date().toGMTString(),
@@ -125,10 +129,10 @@ describe('Pruebas al servicio Test', () => {
 
             const count = 3;
 
-            const res = {
-                status: jest.fn(),
-                result: jest.fn()
-            };
+            // const response = {
+            //     status: jest.fn().mockReturnThis(),
+            //     result: jest.fn()
+            // };
 
             const mockAxiosResponse = {
                 message: [
@@ -145,16 +149,35 @@ describe('Pruebas al servicio Test', () => {
                 .reply(200, mockAxiosResponse, responseHeader);
 
             const service = new TestService();
-            await service.getDogs(count);
+            const response = await service.getDogs(count);
 
             expect(mockAdapter.history.get.length).toBe(1);
             expect(mockAdapter.history.get[0].url).toEqual(urlApi);
-            console.log(res.status.mock);
+            expect(response).toHaveProperty('status');
+            expect(response.status).toBe(0);
+            expect(response).toHaveProperty('message');
+            expect.stringContaining(response.message)
+            expect(response).toHaveProperty('result');
+            expect(response.result).toStrictEqual(mockAxiosResponse);
+        });
 
-            // expect(res.status.mock.calls).toEqual([
-            //     [0]
-            // ]);
+        it('deberia de devolver un error', async () => {
+            const count = 2;
+            const urlApi = `${baseUrlApi}/${count}`;
 
+            mockAdapter.onGet(urlApi).networkErrorOnce();
+
+            const service = new TestService();
+            const response = await service.getDogs(count);
+
+            expect(mockAdapter.history.get.length).toBe(1);
+            expect(mockAdapter.history.get[0].url).toEqual(urlApi);
+            expect(response).toHaveProperty('status');
+            expect(response.status).toBe(1);
+            expect(response).toHaveProperty('message');
+            expect.stringContaining(response.message)
+            expect(response).toHaveProperty('result');
+            expect(response.result).toBeNull();
         });
     });
 });
