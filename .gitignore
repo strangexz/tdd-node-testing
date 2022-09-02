@@ -104,8 +104,8 @@ dist
 # TernJS port file
 .tern-port
 
-# Sqlite3 Local files
-.sqlite3
+# DB Local files
+/database
 
 # Misc
 .DS_Store
